@@ -1,15 +1,10 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class TemperatureConverter extends JFrame{
-    private JButton jB1, jB2, jB3;
-    private JCheckBox jChBox1;
     private JComboBox<String> jComBox1, jComBox2;
-    private JLabel jL1;
-    private JPanel jP1;
-    private JSpinner jSp1;
     private JTextField jTF1, jTF2;
 
     public  TemperatureConverter(){
@@ -17,17 +12,17 @@ public class TemperatureConverter extends JFrame{
     }
 
     private void initComponents(){
-        jChBox1 = new JCheckBox("jCheckBox");
-        jSp1 = new JSpinner();
-        jP1 = new JPanel();
-        jL1 = new JLabel("Конвертер температуры");
+
+
+        JPanel jP1 = new JPanel();
+        JLabel jL1 = new JLabel("Конвертер температуры");
         jComBox1 = new JComboBox<>();
         jComBox2 = new JComboBox<>();
         jTF1 = new JTextField();
         jTF2 = new JTextField();
-        jB1 = new JButton("Конвертировать");
-        jB2 = new JButton("Очистить");
-        jB3 = new JButton("Выход");
+        JButton jB1 = new JButton("Конвертировать");
+        JButton jB2 = new JButton("Очистить");
+        JButton jB3 = new JButton("Выход");
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Конвертер температуры");
@@ -35,7 +30,7 @@ public class TemperatureConverter extends JFrame{
         jP1.setBackground(new Color(51, 51,51));
 
         jL1.setBackground(new Color(255,255,255));
-        jL1.setFont(new Font("Segoe Ui", 1, 24));
+        jL1.setFont(new Font("Segoe Ui", Font.BOLD, 24));
         jL1.setForeground(new Color(255,255,255));
 
         GroupLayout jPLayout = new GroupLayout(jP1);
@@ -44,51 +39,56 @@ public class TemperatureConverter extends JFrame{
         jPLayout.setAutoCreateContainerGaps(true);
 
 
-        jComBox1.setModel(new DefaultComboBoxModel<>(new String[]{"Цельсии", "Фаренгейт"}));
-        jComBox2.setModel(new DefaultComboBoxModel<>(new String[]{"Цельсии", "Фаренгейт"}));
+        jComBox1.setModel(new DefaultComboBoxModel<>(new String[]{"Цельсия", "Фаренгейт"}));
+        jComBox2.setModel(new DefaultComboBoxModel<>(new String[]{"Цельсия", "Фаренгейт"}));
 
         jTF2.setEditable(false);
 
-        jPLayout.setHorizontalGroup(jPLayout.createSequentialGroup()
-                .addComponent(jTF1)
-                .addComponent(jTF2)
-                .addGroup(jPLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(jL1)
-                        .addComponent(jB1))
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(layout
+                .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jComBox1)
+                                .addComponent(jComBox2))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(jTF1)
+                        .addComponent(jTF2)))
+                                .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jB1)
+                                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(jB3)
+                                        .addComponent(jB2)))
+                                .addComponent(jP1)
         );
 
-        jPLayout.setVerticalGroup(jPLayout.createSequentialGroup()
-                .addGroup(jPLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTF1)
-                        .addComponent(jTF2)
-                        .addComponent(jL1))
-                        .addComponent(jB1));
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                .addComponent(jP1)
+        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(jComBox1)
+                .addComponent(jTF1))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                .addComponent(jB1)
+                .addComponent(jB2))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComBox2)
+                        .addComponent(jTF2))
+                .addComponent(jB3))
+
+                );
 
 
 
-        jB1.setFont(new Font("Segoe UI", 3, 14));
-        jB1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jB1ActionPerformed(e);
-            }
-        });
+        jB1.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 14));
+        jB1.addActionListener(this::jB1ActionPerformed);
 
-        jB2.setFont(new Font("Segoe UI", 3, 14));
-        jB2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                   jB2ActionPerformed(e);
-            }
-        });
+        jB2.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 14));
+        jB2.addActionListener(this::jB2ActionPerformed);
 
-        jB3.setFont(new Font("Segoe UI", 3, 14));
-        jB3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                   jB3ActionPerformed(e);
-            }
-        });
+        jB3.setFont(new Font("Segoe UI", Font.BOLD | Font.ITALIC, 14));
+        jB3.addActionListener(this::jB3ActionPerformed);
 
        getContentPane().add(jP1);
 
